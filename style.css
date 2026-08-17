@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #101014;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  padding: 18px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.sub {
+  text-align: center;
+  color: #aaa;
+  margin-top: 0;
+}
+
+.card {
+  background: #1b1b22;
+  border-radius: 16px;
+  padding: 16px;
+  margin: 14px 0;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 0;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+input:not([type]) {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 10px;
+  background: #292932;
+  color: white;
+  outline: none;
+  margin: 8px 0;
+}
+
+input[type="file"] {
+  width: 100%;
+  margin: 8px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 13px;
+  background: #343440;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.buttons button {
+  flex: 1;
+}
+
+.pads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.pads button {
+  min-height: 65px;
+}
+
+.full {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.result {
+  background: #111116;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 10px;
+  line-height: 1.8;
+  color: #ddd;
+}
+
+audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+small {
+  display: block;
+  color: #888;
+  margin-top: 8px;
+}
+
+footer {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  font-size: 12px;
+}

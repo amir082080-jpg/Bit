@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Amir Beat AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="app">
+    <h1>🎵 AMIR BEAT AI</h1>
+    <p class="sub">ساخت ریتم رپ روی گوشی</p>
+
+    <section class="card">
+      <h2>🎚️ کنترل ریتم</h2>
+
+      <label>
+        BPM:
+        <strong id="bpmValue">100</strong>
+      </label>
+
+      <input id="bpm" type="range" min="60" max="180" value="100">
+
+      <div class="buttons">
+        <button id="play">▶️ شروع</button>
+        <button id="stop">⏹ توقف</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🥁 سازها</h2>
+
+      <div class="pads">
+        <button data-sound="kick">KICK</button>
+        <button data-sound="snare">SNARE</button>
+        <button data-sound="hihat">HI-HAT</button>
+        <button data-sound="clap">CLAP</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🤖 هوش مصنوعی</h2>
+
+      <input id="prompt" placeholder="مثلاً: بیت دارک وست‌ساید بساز">
+
+      <button id="aiButton" class="full">
+        ✨ پیشنهاد AI
+      </button>
+
+      <div id="aiResult" class="result">
+        هنوز چیزی ساخته نشده.
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🔑 API Key</h2>
+
+      <input id="apiKey" type="password" placeholder="API Key را وارد کنید">
+
+      <button id="saveKey" class="full">
+        💾 ذخیره روی دستگاه
+      </button>
+
+      <small>
+        کلید فقط در حافظه محلی مرورگر ذخیره می‌شود.
+      </small>
+    </section>
+
+    <section class="card">
+      <h2>🔊 صدای دلخواه</h2>
+
+      <input id="audioFile" type="file" accept="audio/*">
+
+      <audio id="audioPlayer" controls></audio>
+    </section>
+
+    <footer>
+      AMIR BEAT AI • Mobile Edition
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
