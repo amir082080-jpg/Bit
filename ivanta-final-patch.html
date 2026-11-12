@@ -1,0 +1,97 @@
+<!-- I VANTA PATCH — paste this block immediately before </body> in Site-time/index.html -->
+<style id="ivanta-final-layout-fix">
+.settings-screen{
+  inset:0!important;width:100vw!important;height:100dvh!important;
+  overflow:hidden!important;direction:rtl!important;
+  grid-template-columns:minmax(220px,270px) minmax(0,1fr)!important
+}
+.settings-screen.open{display:grid!important}
+.settings-menu{
+  min-width:0!important;min-height:0!important;overflow-y:auto!important;
+  overflow-x:hidden!important;border-right:0!important;
+  border-left:1px solid #ffffff18!important
+}
+.settings-main{
+  min-width:0!important;min-height:0!important;height:100dvh!important;
+  overflow:hidden!important
+}
+.settings-head{flex:0 0 auto!important;min-width:0!important}
+.settings-scroll{
+  min-height:0!important;min-width:0!important;max-width:none!important;
+  width:100%!important;margin:0!important;overflow:auto!important;
+  overscroll-behavior:contain!important
+}
+.settings-page{width:100%!important;max-width:900px!important;margin-inline:auto!important}
+.settings-menu button{direction:rtl!important;text-align:right!important;white-space:normal!important}
+.settings-menu button b.settings-icon{flex:0 0 28px!important;display:grid!important;place-items:center!important}
+.settings-menu button b.settings-icon svg{
+  width:21px!important;height:21px!important;fill:none!important;
+  stroke:currentColor!important;stroke-width:1.7!important;
+  stroke-linecap:round!important;stroke-linejoin:round!important
+}
+body{overflow-x:hidden!important}
+@media(max-width:850px){
+  .settings-screen.open{grid-template-columns:190px minmax(0,1fr)!important}
+  .settings-menu{padding:12px 8px!important}
+  .settings-scroll{padding:14px!important}
+}
+@media(max-width:600px){
+  .settings-screen.open{grid-template-columns:62px minmax(0,1fr)!important}
+  .settings-menu{padding:8px 4px!important}
+  .settings-menu button{justify-content:center!important;padding:10px 2px!important}
+  .settings-menu button span,.settings-menu h2,.settings-menu>p{display:none!important}
+  .settings-menu button b.settings-icon{flex-basis:28px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .settings-page{animation:none!important}
+  *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+<script>
+/* Intercept the existing Google button before its redirect handler.
+   Firebase's existing auth-state listener continues to load the user's cloud data. */
+(()=>{
+  const button=document.getElementById('googleAuthBtn');
+  if(!button || !window.firebase) return;
+  document.addEventListener('click',async event=>{
+    if(event.target!==button && !button.contains(event.target)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    const sayMessage=message=>{
+      const box=document.getElementById('authMessage');
+      if(box) box.textContent=message;
+    };
+    button.disabled=true;
+    sayMessage('در حال اتصال امن به حساب گوگل…');
+    const auth=firebase.auth();
+    const provider=new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({prompt:'select_account'});
+    try{
+      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      await auth.signInWithPopup(provider);
+      sayMessage('ورود موفق بود؛ اطلاعات حساب در حال بارگذاری است.');
+    }catch(error){
+      console.error('I VANTA Google sign-in:',error);
+      const fallbackCodes=[
+        'auth/popup-blocked',
+        'auth/operation-not-supported-in-this-environment'
+      ];
+      if(fallbackCodes.includes(error.code)){
+        try{
+          sayMessage('مرورگر پنجره ورود را باز نکرد؛ انتقال به ورود گوگل…');
+          await auth.signInWithRedirect(provider);
+          return;
+        }catch(redirectError){
+          console.error(redirectError);
+          sayMessage(redirectError.message||'ورود گوگل انجام نشد.');
+        }
+      }else{
+        sayMessage(error.message||'ورود گوگل انجام نشد.');
+      }
+      button.disabled=false;
+    }
+  },true);
+})();
+</script>
+<!-- END I VANTA PATCH -->
